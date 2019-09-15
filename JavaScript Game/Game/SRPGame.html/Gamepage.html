@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> SCISSOR, ROCK, PAPER</title>
+</head>
+<script>
+var player = prompt("Please enter your name: ");
+var AI = Math.floor(Math.random()*3+1);
+if(AI == 1){
+alert("Your opponent is Alex");
+AI = "Alex";
+}
+if(AI == 2){
+alert("Your opponent is Robert");
+AI = "Robert";
+}
+if(AI == 3){
+alert("Your opponent is Tommy");
+AI = "Tommy";
+}
+setTimeout(function() { alert("Good Luck, " + player); }, 500);
+</script>
+<style>
+ul#button {padding :0;}
+ul#button li{display:inline;}
+ul#button li a {background-color:black;color:white;font-family:Times New Romance;font-size:25px;padding:10px 30px;border-radius:4px 4px 4px 4px;}
+ul#button li a:hover {background-color:blue;}
+</style>
+<body style = "font-family:Arial;font-size:20px;height:100%;width:100%;background-position:center" background = "../images/versus1.jpg" >
+<div>
+<div align = "center" style = "font-family:Arial Black;font-size:30px;background-color:#6ecefa;width:300px;height:720px;float:left">
+<button id = "PlayerChoice1" style = "font-family:Arial Black;font-size:30px;background-color:#0cf7e8;width:200px;height:80px;margin-top:100px">Scissor</button>
+<button id = "PlayerChoice2" style = "font-family:Arial Black;font-size:30px;background-color:#0cf7e8;width:200px;height:80px;margin-top:100px">Rock</button>
+<button id = "PlayerChoice3" style = "font-family:Arial Black;font-size:30px;background-color:#0cf7e8;width:200px;height:80px;margin-top:100px">Paper</button>
+<script>document.write("<h1>" + player + "</h1>");</script>
+</div>
+<div align = "center" id = "UserScore" style = "width:150px;height:100px;float:left;background-color:#6ecefa;margin-left:10px;font-family:Arial black;font-size:60px"></div>
+<div align = "center" id = "roundCal" style = "position:absolute;margin-left:620px;width:300px;height:60px;font-family:Arial black;font-size:20px;background-color:black;color:white"></div>
+<div align = "center" id = "result" style = "position:absolute;margin-left:620px;margin-top:60px;width:300px;height:40px;font-family:Arial black;font-size:20px;background-color:black;color:white"></div>
+
+<img id = "PChoice1" src = "../images/Scissor.png" style = "position:absolute;visibility:hidden;width:150px;height:150px;margin-top:80px">
+<img id = "PChoice2" src = "../images/Rock.png" style = "position:absolute;visibility:hidden;width:150px;height:150px;margin-top:240px">
+<img id = "PChoice3" src = "../images/Paper.png" style = "position:absolute;visibility:hidden;width:150px;height:150px;margin-top:400px">
+<img src = "../images/logo.png" style = "width:250px;height:300px;margin-left:190px;margin-top:150px">
+<div  align = "center" style = "font-family:Arial Black;font-size:30px;background-color:#f26678;width:300px;height:720px;float:right;float:top">
+<button id = "CPUChoice1" style = "font-family:Arial Black;font-size:30px;background-color:#f78f8f;width:200px;height:80px;margin-top:100px">Scissor</button>
+<button id = "CPUChoice2" style = "font-family:Arial Black;font-size:30px;background-color:#f78f8f;width:200px;height:80px;margin-top:100px">Rock</button>
+<button id = "CPUChoice3" style = "font-family:Arial Black;font-size:30px;background-color:#f78f8f;width:200px;height:80px;margin-top:100px">Paper</button>
+<script>document.write("<h1>" + AI + "</h1>");</script>
+</div>
+<div align = "center" id = "CPUScore" style = "width:150px;height:100px;float:right;background-color:#f26678;margin-right:10px;float:bottom;font-family:Arial black;font-size:60px"></div>
+<img id = "CChoice1" src = "../images/Scissor.png" style = "position:absolute;visibility:hidden;width:150px;height:150px;margin-top:80px;margin-left:25px">
+<img id = "CChoice2" src = "../images/Rock.png" style = "position:absolute;visibility:hidden;width:150px;height:150px;margin-top:240px;margin-left:25px">
+<img id = "CChoice3" src = "../images/Paper.png" style = "position:absolute;visibility:hidden;width:150px;height:150px;margin-top:400px;margin-left:25px">
+</div>
+<div align = "center">
+<button id = "End" style = "width:150px;height:50px;margin-top:200px;background-color:#2870e2;font-family:arial black;font-size:15px" >End Game</button>
+<button id = "Reset" style = "width:150px;height:50px;font-family:Arial black;font-size:15px;background-color:#2870e2" >Reset</button>
+</div>
+<script>
+var PlayerWin = 0;
+var ComputerWin = 0;
+var round = 0;
+roundCal.innerHTML = "Round:<br> 0";
+result.innerHTML = "<marquee behavior = 'alternate'>Have a Nice Day!</marquee>";
+UserScore.textContent = 0;
+CPUScore.textContent  = 0;
+PlayerChoice1.onclick = function (event){
+PlayerChoice1.style.background = "blue";
+PChoice1.style.visibility = "visible";
+PChoice2.style.visibility = "hidden";
+PChoice3.style.visibility = "hidden";
+round++;
+roundCal.innerHTML = "Round:<br> " + round;
+var ComputerChoice = Math.floor(Math.random() * 3 + 1);
+if (ComputerChoice == 1){
+CPUChoice1.style.background = "red";
+CChoice1.style.visibility = "visible";
+CChoice2.style.visibility = "hidden";
+CChoice3.style.visibility = "hidden";
+setTimeout(function() {result.textContent = "It is a Tie!";},100);
+setTimeout(function(){
+PlayerChoice1.style.background = "#0cf7e8";
+CPUChoice1.style.background = "#f78f8f";
+CChoice1.style.visibility = "hidden";
+PChoice1.style.visibility = "hidden";
+},1000);
+
+}
+
+else if(ComputerChoice == 2){
+CPUChoice2.style.background = "red";
+CChoice2.style.visibility = "visible";
+CChoice1.style.visibility = "hidden";
+CChoice3.style.visibility = "hidden";
+setTimeout(function() {result.textContent = AI + " Win!";},100);
+setTimeout(function(){
+PlayerChoice1.style.background = "#0cf7e8";
+CPUChoice2.style.background = "#f78f8f";
+CChoice2.style.visibility = "hidden";
+PChoice1.style.visibility = "hidden";
+},1000);
+ComputerWin++;
+CPUScore.textContent = ComputerWin;
+
+}
+else if(ComputerChoice == 3){
+CPUChoice3.style.background = "red";
+CChoice3.style.visibility = "visible";
+CChoice1.style.visibility = "hidden";
+CChoice2.style.visibility = "hidden";
+setTimeout(function() {result.textContent = player + " Win!";},100);
+setTimeout(function(){
+PlayerChoice1.style.background = "#0cf7e8";
+CPUChoice3.style.background = "#f78f8f";
+CChoice3.style.visibility = "hidden";
+PChoice1.style.visibility = "hidden";
+},1000);
+PlayerWin++;
+UserScore.textContent = PlayerWin;
+
+}
+if(round == 5){
+setTimeout(function(){alert("Game Ended\nPlease wait for the system to calculate your score.");},1100);
+	if(PlayerWin == ComputerWin){
+	setTimeout(function() {alert("Fair game");},1200);
+
+	}
+	else if(PlayerWin > ComputerWin){
+	setTimeout(function() {alert("Congratulation," + player + " are the winner!");},1200);
+	
+	}
+	else if (ComputerWin > PlayerWin){
+	setTimeout(function() {alert("Oops, you lose. Try harder next time." );},1200);
+	
+	}
+	
+	setTimeout(function(){
+	result.textContent = "Score Resetted. Play again";
+	PlayerWin = 0;
+	ComputerWin = 0;
+	UserScore.textContent = 0;
+	CPUScore.textContent = 0;
+	round = 0;
+	roundCal.innerHTML = "Round:<br> 0";
+	},2500);
+}
+}
+
+PlayerChoice2.onclick = function (event){
+PlayerChoice2.style.background = "blue";
+PChoice2.style.visibility = "visible";
+PChoice1.style.visibility = "hidden";
+PChoice3.style.visibility = "hidden";
+round++;
+roundCal.innerHTML = "Round:<br> " + round;
+var ComputerChoice = Math.floor(Math.random() * 3 + 1);
+if (ComputerChoice == 1){
+CPUChoice1.style.background = "red";
+CChoice1.style.visibility = "visible";
+CChoice2.style.visibility = "hidden";
+CChoice3.style.visibility = "hidden";
+setTimeout(function() {result.textContent = player + " Win!";},100);
+setTimeout(function(){
+PlayerChoice2.style.background = "#0cf7e8";
+CPUChoice1.style.background = "#f78f8f";
+CChoice1.style.visibility = "hidden";
+PChoice2.style.visibility = "hidden";
+},1000);
+PlayerWin++;
+UserScore.textContent = PlayerWin;
+
+}
+else if(ComputerChoice == 2){
+CPUChoice2.style.background = "red";
+CChoice2.style.visibility = "visible";
+CChoice1.style.visibility = "hidden";
+CChoice3.style.visibility = "hidden";
+setTimeout(function() {result.textContent = "It is a Tie!";},100);
+setTimeout(function(){
+PlayerChoice2.style.background = "#0cf7e8";
+CPUChoice2.style.background = "#f78f8f";
+CChoice2.style.visibility = "hidden";
+PChoice2.style.visibility = "hidden";
+},1000);
+
+}
+else if(ComputerChoice == 3){
+CPUChoice3.style.background = "red";
+CChoice3.style.visibility = "visible";
+CChoice1.style.visibility = "hidden";
+CChoice2.style.visibility = "hidden";
+setTimeout(function() {result.textContent = AI + " Win!";},100);
+setTimeout(function(){
+PlayerChoice2.style.background = "#0cf7e8";
+CPUChoice3.style.background = "#f78f8f";
+CChoice3.style.visibility = "hidden";
+PChoice2.style.visibility = "hidden";
+},1000);
+ComputerWin++;
+CPUScore.textContent = ComputerWin;
+
+}
+if(round == 5){
+setTimeout(function(){alert("Game Ended\nPlease wait for the system to calculate your score.");},1100);
+	if(PlayerWin == ComputerWin){
+	setTimeout(function() {alert("Fair game");},1200);
+
+	}
+	else if(PlayerWin > ComputerWin){
+	setTimeout(function() {alert("Congratulation," + player + " are the winner!");},1200);
+
+	}
+	else if (ComputerWin > PlayerWin){
+	setTimeout(function() {alert("Oops, you lose. Try harder next time." );},1200);
+	
+	}
+	setTimeout(function(){
+	result.textContent = "Score Resetted. Play again";
+	PlayerWin = 0;
+	ComputerWin = 0;
+	UserScore.textContent = 0;
+	CPUScore.textContent = 0;
+	round = 0;
+	roundCal.innerHTML = "Round:<br> 0";
+	},2500);
+	}
+	
+}
+PlayerChoice3.onclick = function (event){
+PlayerChoice3.style.background = "blue"
+PChoice3.style.visibility = "visible";
+PChoice1.style.visibility = "hidden";
+PChoice2.style.visibility = "hidden";
+round++;
+roundCal.innerHTML = "Round:<br> " + round;
+var ComputerChoice = Math.floor(Math.random() * 3 + 1);
+if (ComputerChoice == 1){
+CPUChoice1.style.background = "red";
+CChoice1.style.visibility = "visible";
+CChoice2.style.visibility = "hidden";
+CChoice3.style.visibility = "hidden";
+setTimeout(function() {result.textContent = AI + " Win!";},100);
+setTimeout(function(){
+PlayerChoice3.style.background = "#0cf7e8";
+CPUChoice1.style.background = "#f78f8f";
+CChoice1.style.visibility = "hidden";
+PChoice3.style.visibility = "hidden";
+},1000);
+ComputerWin++;
+CPUScore.textContent = ComputerWin;
+
+}
+else if(ComputerChoice == 2){
+CPUChoice2.style.background = "red";
+CChoice2.style.visibility = "visible";
+CChoice1.style.visibility = "hidden";
+CChoice3.style.visibility = "hidden";
+setTimeout(function() {result.textContent = player + " Win!";},100);
+setTimeout(function(){
+PlayerChoice3.style.background = "#0cf7e8";
+CPUChoice2.style.background = "#f78f8f";
+CChoice2.style.visibility = "hidden";
+PChoice3.style.visibility = "hidden";
+},1000);
+PlayerWin++;
+UserScore.textContent = PlayerWin;
+
+}
+else if(ComputerChoice == 3){
+CPUChoice3.style.background = "red";
+CChoice3.style.visibility = "visible";
+CChoice1.style.visibility = "hidden";
+CChoice2.style.visibility = "hidden";
+setTimeout(function() {result.textContent = "It is a Tie!";},100);
+setTimeout(function(){
+PlayerChoice3.style.background = "#0cf7e8";
+CPUChoice3.style.background = "#f78f8f";
+CChoice3.style.visibility = "hidden";
+PChoice3.style.visibility = "hidden";
+},1000);
+
+}
+if(round == 5){
+setTimeout(function(){alert("Game Ended\nPlease wait for the system to calculate your score.")},1100);
+	if(PlayerWin == ComputerWin){
+	setTimeout(function() {alert("Fair game");},1200);
+	
+	}
+	else if(PlayerWin > ComputerWin){
+	setTimeout(function() {alert("Congratulation," + player + " are the winner!");},1200);
+	
+	}
+	else if (ComputerWin > PlayerWin){
+	setTimeout(function() {alert("Oops, you lose. Try harder next time." );},1200);
+	
+	}
+	setTimeout(function() {
+	result.textContent = "Score Resetted. Play again";
+	PlayerWin = 0;
+	ComputerWin = 0;
+	UserScore.textContent = 0;
+	CPUScore.textContent = 0;
+	round = 0;
+	roundCal.innerHTML = "Round:<br> 0";
+	},2500);
+	}
+
+}
+
+Reset.onclick = function (event){
+PlayerWin = 0;
+ComputerWin = 0;
+alert("Score Resetted");
+result.textContent = "Score Resetted";
+UserScore.textContent = 0;
+CPUScore.textContent = 0;
+round = 0;
+roundCal.innerHTML = "Round:<br> 0";
+
+}
+
+End.onclick = function(event){
+
+
+	alert("Thanks for playing.");
+	location.href = "Home.html";
+
+
+}
+
+
+</script>
+</body>
+
+
+
+</html>
+ 
